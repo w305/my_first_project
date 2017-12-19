@@ -1,0 +1,27 @@
+PROCEDURE "my_first_project.DB_first_try::createCountry" ( 
+	IN im_country NVARCHAR(100), im_continent NVARCHAR(100),
+	OUT ex_error NVARCHAR(100)
+	)
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+    AS
+BEGIN
+   /*************************************
+       Write your procedure logic 
+   *************************************/
+   declare noc integer;
+   
+   select count(*) into noc from "my_first_project.DB_first_try::cds_first.world" where "continent" = im_continent;
+  
+	if :noc = 0 then
+		insert into "my_first_project.DB_first_try::cds_first.world" values ( im_continent);
+	end if;  
+	select count(*) into noc from "my_first_project.DB_first_try::cds_first.country" where "name" = im_country;
+		
+	if :noc > 0 then
+		ex_error := 'ERROR: Country ' || :im_country || ' already exists!';
+	else
+		insert into "my_first_project.DB_first_try::cds_first.country" values (im_country, im_continent);
+	end if;  
+END

@@ -1,0 +1,14 @@
+namespace my_first_project.DB_first_try;
+
+context cds_first {
+    /*@@layout{"layoutInfo":{"x":-381,"y":-72}}*/
+entity world {
+        key continent : String(100);
+    }
+
+    /*@@layout{"layoutInfo":{"x":-762,"y":-160.5}}*/
+    entity country {
+        key name   : String(100);
+            partof : association[0..1] to world;
+    };
+};

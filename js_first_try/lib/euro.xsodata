@@ -1,0 +1,3 @@
+service {
+  "my_first_project.DB_first_try::european_countries" as "euro" keys generate local "ID";
+}

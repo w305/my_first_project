@@ -1,0 +1,24 @@
+ID: my_first_project
+_schema-version: '2.0'
+version: 0.0.1
+modules:
+  - name: DB_first_try
+    type: hdb
+    path: DB_first_try
+    requires:
+      - name: hdi_DB_first_try
+  - name: js_first_try
+    type: nodejs
+    path: js_first_try
+    provides:
+      - name: js_first_try_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: DB_first_try
+      - name: hdi_DB_first_try
+resources:
+  - name: hdi_DB_first_try
+    properties:
+      hdi-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
